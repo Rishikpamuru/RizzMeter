@@ -1,20 +1,26 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { UserProvider } from './src/context/UserContext';
+import { RizzProvider } from './src/context/RizzContext';
+import AppNavigator from './src/navigation/AppNavigator';
+import { theme } from './src/utils/theme';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <PaperProvider theme={theme}>
+        <UserProvider>
+          <RizzProvider>
+            <NavigationContainer>
+              <AppNavigator />
+              <StatusBar style="light" backgroundColor="#6200ee" />
+            </NavigationContainer>
+          </RizzProvider>
+        </UserProvider>
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
